@@ -1,12 +1,12 @@
-# Step 1: Build Stage
-FROM maven:3openjdk-18 AS build
+# Step 1: Build
+FROM maven:3.9.6-eclipse-temurin-18 AS build
 WORKDIR /app
 COPY . .
 RUN mvn clean package -DskipTests
 
-# Step 2: Run Stage
-FROM openjdk:18-jdk-slim
+# Step 2: Run
+FROM eclipse-temurin:18-jdk
 WORKDIR /app
-COPY --from=build /app/target/calender-0.0.1-SNAPSHOT.war calender.war
+COPY --from=build /app/target/*.jar app.jar
 EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "calender.war"]
+ENTRYPOINT ["java", "-jar", "app.jar"]
