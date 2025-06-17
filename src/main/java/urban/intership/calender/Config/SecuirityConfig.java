@@ -37,7 +37,8 @@ public class SecuirityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/auth/register", "/auth/login", "/public/**", "/css/**", "/js/**", "/").permitAll()
                         .requestMatchers("/admin/**").hasAnyAuthority("ADMIN")
-                        .anyRequest().authenticated()
+                        .anyRequest().permitAll()
+            
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
