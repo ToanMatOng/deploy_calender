@@ -12,4 +12,5 @@ public interface EventService {
     List<Event> getAllEvent();
     String createEvent(CreateEventRequest request);
     void delete(Long id);
+     List<Event> getAllEventByEmail(String email);
 }
