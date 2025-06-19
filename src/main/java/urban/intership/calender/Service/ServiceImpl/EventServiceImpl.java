@@ -31,26 +31,6 @@ public class EventServiceImpl implements EventService {
     @Autowired
     private HeadQuarterRepository headQuarterRepository;
 
-//    private EventDTO toEventDTO(Event event){
-//        EventDTO dto= new EventDTO();
-//        dto.setId(event.getId());
-//        dto.setDay(event.getDay());
-//        dto.setStartTime(event.getStartTime());
-//        dto.setEndTime(event.getEndTime());
-//        dto.setTaskDescription(event.getTaskDescription());
-//        dto.setStatus(event.getStatus());
-//        dto.setEmployee(event.getEmployee().getId());
-//        dto.setWorkplace(event.getWorkplace().getId());
-//        dto.setWorkType(event.getWorkType().getId());
-//        return dto;
-//    }
-//    private List<EventDTO> toEventDTOlst(){
-//        return eventRepository.findAll()
-//                .stream()
-//                .map(this::toEventDTO)
-//                .collect(Collectors.toList());
-//    }
-
     @Override
     public List<Event> getAllEvent() {
         return eventRepository.findAll();
@@ -91,6 +71,11 @@ public class EventServiceImpl implements EventService {
         }catch (Exception e){
             return "Some thing wrong: "+e.getMessage();
         }
+    }
+      @Override
+    public List<Event> getAllEventByEmail(String email) {
+        Optional<Employee> employee= employeeRepository.findByEmail(email);
+        return employee.get().getEvents();
     }
 
 
