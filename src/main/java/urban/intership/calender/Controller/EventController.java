@@ -24,6 +24,9 @@ public class EventController {
     public String createAndUpdateEvent(@RequestBody CreateEventRequest request){
         return eventService.createEvent(request);
     }
+      public List<Event> getAllByEmail(@PathVariable String email){
+        return eventService.getAllEventByEmail(email);
+    }
 
     @DeleteMapping("/{id}")
     void delete(@PathVariable Long id){
